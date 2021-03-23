@@ -77,7 +77,7 @@ class State:
             elif c == ord('u'):
                 query_update(self.cursor, self.connection, self.table_sel, self.keys[self.db_cur_y - 1][self.cur_y - 1][0], self.columns[self.db_cur_y - 1], get_input(self.tab_win, self.columns[self.db_cur_y - 1], self.cur_y + 1))
             elif c == ord('d'):
-                query_delete(self.cursor, self.connection, self.table_sel, self.columns[self.db_cur_y - 1][0], self.keys[self.db_cur_y - 1][self.cur_y][0])
+                query_delete(self.cursor, self.connection, self.table_sel, self.columns[self.db_cur_y - 1][0], self.keys[self.db_cur_y - 1][self.cur_y - 1][0])
 
         return True
 
@@ -159,11 +159,21 @@ def query_filter(cursor, table, cols):
     return cursor.fetchall()
 
 def query_insert(cursor, connection, table, data):
+    for i in data:
+        try:
+            i = int(i)
+        except ValueError:
+            pass
     cursor.execute("INSERT INTO {} VALUES ({});"
             .format(table, ", ".join(len(data) * '?')), data)
     connection.commit()
 
 def query_update(cursor, connection, table, key, cols, data):
+    for i in data:
+        try:
+            i = int(i)
+        except ValueError:
+            pass
     if len(data) != len(cols): # error
         return
     q_str = "UPDATE {} SET ".format(table)
@@ -187,12 +197,16 @@ def get_input(win, col, r):
     win.border(0)
     win.addstr(0, 1, "Columns")
     last = 1
-    ret = []
+    input = []
     curses.echo()
     for i in range(len(col)):
-        ret.append(win.getstr(r, last, len(col[i]) + GAP - 1))
+        input.append(win.getstr(r, last, len(col[i]) + GAP - 1))
         last += len(col[i]) + GAP
     curses.noecho()
+    ret = []
+    for i in input:
+        ret.append(i.decode())
+    
     return ret
 
 """
