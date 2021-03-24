@@ -13,7 +13,7 @@ While selecting rows, `i` can be used to insert new entries, `u` to update the s
 
 I created this software to better my understandning of SQL APIs as well as curses.
 
-[Software Demo Video](http://youtube.com)
+[Software Demo Video](https://youtu.be/jwp5bSwuYMQ)
 
 # Relational Database
 
