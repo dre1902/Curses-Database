@@ -11,7 +11,7 @@ While selecting columns, the space key may be used to select/deselect columns to
 
 While selecting rows, `i` can be used to insert new entries, `u` to update the selected entry, and `d` to delete the selected entry.
 
-I created this software to better my understandning of SQL APIs as well as curses.
+I created this software to better my understanding of SQL APIs as well as curses.
 
 [Software Demo Video](https://youtu.be/jwp5bSwuYMQ)
 
